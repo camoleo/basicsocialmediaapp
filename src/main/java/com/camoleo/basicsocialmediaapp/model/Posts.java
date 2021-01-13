@@ -8,23 +8,21 @@
 //import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.Id;
-//import javax.persistence.ManyToMany;
 //import java.time.LocalDate;
 //
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
 //@Builder
-//@Entity(name = "comment")
-//public class Comment {
+//@Entity(name = "posts")
+//public class Post {
 //
 //    @Id
 //    @GeneratedValue
 //    private Long id;
-//    private String username; //wskazanie na użytkownika
+//    private String title;
+//    private String UserName;
 //    private LocalDate createdAt;
+//    private String text;
 //
-//
-//    @ManyToMany
-//    private Post post;
 //}

@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.Entity;
 
-@EnableJpaRepositories("com.camoleo.basicsocialmediaapp.repo")
-@EntityScan("com.camoleo.basicsocialmediaapp.model")
+
 @SpringBootApplication
 public class BasicsocialmediaappApplication {
 

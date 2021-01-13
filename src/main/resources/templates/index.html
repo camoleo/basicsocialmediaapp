@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+<meta charset = “UTF-8” />
+<title>Hello, CommentUs</title>
+</head>
+<body>
+<header th:replace="layout :: site-header"></header>
+<h1>Welcome to CommentUs</h1>
+Now is: <b th:text="${#execInfo.now.time}"> date and time</b>
+<footer th:replace="layout ::site-footer"></footer>
+</body>
+</html>
