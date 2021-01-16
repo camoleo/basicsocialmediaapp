@@ -1,7 +1,6 @@
 package com.camoleo.basicsocialmediaapp.controller;
 
 import com.camoleo.basicsocialmediaapp.model.Post;
-
 import com.camoleo.basicsocialmediaapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +13,11 @@ public class PostsController {
     @Autowired
     private PostService postService;
 
-//    @Autowired
-//    private NotificationService notifyService;
-
     @RequestMapping("/posts/view/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
         Post post = postService.findById(id);
-//        if (post == null) {
-//            notifyService.addErrorMessage("Cannot find post #" + id);
-//            return "redirect:/";
-//        }
-        model.addAttribute("post", post);
+        model.addAttribute("post",post);
         return "posts/view";
     }
+
 }
