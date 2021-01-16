@@ -15,7 +15,8 @@
 <title>CommentUs</title>
 </head>
 <body>
-<header th:fragment="site-header">
+<header th:fragment="site-header" th:remove="tag">
+<header>
 <!--<a href="index.html" th:href="@{/}"><img src="static/img/logo.png" th:src="@{/img/logo.png}"/> </a> -->
 <a href="index.html" th:href="@{/}">Home</a>
 <a href="users/login.html" th:href="@{/users/login}">Login</a>
@@ -23,12 +24,19 @@
 <a href="posts/index.html" th:href="@{/posts}">Posts</a>
 <a href="posts/create.html" th:href="@{/posts/create}">Create Post</a>
 <a href="users/index.html" th:href="@{/users}">Users</a>
-<div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
+<div id="logged-in-info"><span>Hello, <b>(user)</b></span>
 <form method="post" th:action="@{/users/logout}">
 <input type="submit" value="Logout"/>
 </form>
 </div>
-</header> <h1>Welcome</h1>
+</header>
+<ul id="messages" th:with="notifyMessages=${session[T(com.camoleo.basicsocialmediaapp.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}">
+</li>
+<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.camoleo.basicsocialmediaapp.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+</ul>
+</header>
+<h1>Welcome</h1>
 <p>Welcome to CommentUs</p> <footer th:fragment="site-footer">
     &copy; CommentUs Social System, 2021
 </footer>
