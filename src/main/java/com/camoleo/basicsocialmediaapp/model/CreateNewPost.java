@@ -7,5 +7,6 @@ public class CreateNewPost {
     private String title;
     private String text;
     private LocalDate createdAt;
+    private String UserName;
 
 }
