@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceStubImpl implements PostService {
-
     private List<Post> posts = new ArrayList<Post>() {{
         add(new Post(1L, "First Post", "<p>Line #1.</p><p>Line #2</p>", null));
         add(new Post(2L, "Second Post",
@@ -24,7 +23,6 @@ public class PostServiceStubImpl implements PostService {
         add(new Post(5L, "Post Number 5", "<p>Just posting</p>", null));
         add(new Post(6L, "Sixth Post", "<p>Another interesting post</p>", null));
     }};
-
 
     @Override
     public List<Post> findAll() {

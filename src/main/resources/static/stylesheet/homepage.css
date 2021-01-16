@@ -50,3 +50,7 @@ body>main:after {
     display: block;
     clear: both;
 }
+.formError {
+    color: red;
+    font-style: italic;
+}
