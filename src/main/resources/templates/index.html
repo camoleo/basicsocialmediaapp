@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head">
+<head th:replace="homepage :: site-head">
 <meta charset = “UTF-8” />
 <title>Hello, CommentUs</title>
 </head>
 <body>
-<header th:replace="layout :: site-header"></header>
-<h1>Welcome to CommentUs</h1>
+<header th:replace="homepage :: site-header"></header>
+<aside>
+    <h2>Recent Posts</h2>
+    <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}"
+       th:href="@{/posts/view/{id}/(id=${p.id})}">What's up?</a>
+</aside>
+
+<main id="posts">
+    <article th:each="p : ${latest3posts}">
+    <h2 class="title" th:text="${p.title}">Post title</h2>
+    <div class="createdAt">
+    <i>Posted on</i>
+    <span th:text="${#dates.format(p.createdAt,'dd-MM-yyyy')}">15-01-2021</span>
+    <span th:if="${p.userName}" th:remove="tag">
+        <i>by</i>
+        <span th:text="${p.userName.fullName !=null ?
+        p.userName.fullName : p.userName}">Svetlin Nakov</span>
+    </span>
+    </div>
+    <p class="content" th:utext="${p.text}">Post content</p>
+</article>
+</main>
 Now is: <b th:text="${#execInfo.now.time}"> date and time</b>
-<footer th:replace="layout ::site-footer"></footer>
+<footer th:replace="homepage ::site-footer"></footer>
 </body>
 </html>
