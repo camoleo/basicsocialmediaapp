@@ -16,4 +16,14 @@
 //                .permitAll()
 //                .and().csrf().disable();
 //    }
+//or @Override
+//protected void configure(final HttpSecurity http) throws Exception {
+//        http
+//        .formLogin()
+//        .loginPage("/login.html")
+//        .failureUrl("/login-error.html")
+//        .and()
+//        .logout()
+//        .logoutSuccessUrl("/index.html");
+       // }
 //}

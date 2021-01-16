@@ -26,13 +26,13 @@ addNotificationMessage(NotificationMessageType.INFO,message);
 addNotificationMessage(NotificationMessageType.ERROR,message);
     }
 
-    private void addNotificationMessage(NotificationMessageType type, String msg) {
+    private void addNotificationMessage(NotificationMessageType type, String message) {
         List<NotificationMessage> notifyMessages = (List<NotificationMessage>)
                 httpSession.getAttribute(NOTIFY_MSG_SESSION_KEY);
         if(notifyMessages == null){
-            notifyMessages = new ArrayList<NotificationMessage>();
+            notifyMessages = new ArrayList<>();
         }
-        notifyMessages.add(new NotificationMessage(type, msg));
+        notifyMessages.add(new NotificationMessage(type, message));
         httpSession.setAttribute(NOTIFY_MSG_SESSION_KEY,notifyMessages);
     }
 
