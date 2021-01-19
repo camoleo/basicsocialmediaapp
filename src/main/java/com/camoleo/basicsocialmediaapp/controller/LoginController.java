@@ -2,6 +2,8 @@ package com.camoleo.basicsocialmediaapp.controller;
 
 import com.camoleo.basicsocialmediaapp.model.LoginForm;
 
+import com.camoleo.basicsocialmediaapp.model.User;
+import com.camoleo.basicsocialmediaapp.service.NotificationService;
 import com.camoleo.basicsocialmediaapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -18,33 +21,34 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-//    @Autowired
-//    private NotificationService notifiyService;
+    @Autowired
+    private NotificationService notifiyService;
 
-    @RequestMapping(value = "/users/login")
-    public String login(){
-        return "loginpage.html";
+    @RequestMapping("/users/login")
+    public String login(LoginForm loginForm) {
+        return "users/login";
     }
 
     // Login form with error
-    @RequestMapping("/login-error.html")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "loginpage.html";
+    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
+    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            notifiyService.addErrorMessage("Please fill the form correctly!");
+            return "/users/login";
+        }
+        if (!userService.authenticate(
+                loginForm.getUserName(), loginForm.getPassword())) {
+            notifiyService.addErrorMessage("Invalid login!");
+            return "users/login";
+        }
+        notifiyService.addInfoMessage("Login succesful :)");
+        return "redirect:/";
     }
+    @RequestMapping("users")
+        public String viewUsers(Model model){
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "users/users";
+        }
 
-//    @RequestMapping(value = "users/login", method = RequestMethod.POST)
-//    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult){
-//        if(bindingResult.hasErrors()){
-//            notifiyService.addErrorMessage("UPS something's wrong.. Please fill in the form correctly!");
-//            return "users/login";
-//        }
-//        if(!userService.authenticate(
-//                loginForm.getUserName(),loginForm.getPassword())){
-//            notifiyService.addErrorMessage("Invalid login!");
-//            return "users/login";
-//        }
-//        notifiyService.addInfoMessage("Login succesful :)");
-//        return "redirect";
-//    }
 }

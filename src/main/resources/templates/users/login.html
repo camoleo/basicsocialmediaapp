@@ -9,7 +9,7 @@
 <header th:replace="homepage :: site-header"></header>
 <h1>Login in the CommentUs</h1>
 <!--<p th:if="${loginError}" class="error">Wrong user or password</p>-->
-<form th:action="@{/loginpage.html}" method="post">
+<form th:action="@{/templates/users/login.html}" method="post">
     <label for="username">Username</label>:
     <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
     <label for="password">Password</label>:

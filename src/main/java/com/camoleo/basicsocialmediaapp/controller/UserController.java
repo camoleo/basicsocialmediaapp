@@ -33,7 +33,7 @@
 //
 //    @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
-//    public User create(@RequestBody User user) {
+//    public User viewPosts(@RequestBody User user) {
 //        return userRepository.save(user);
 //    }
 //

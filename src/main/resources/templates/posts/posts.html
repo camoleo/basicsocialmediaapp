@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="homepage :: site-head">
+    <meta charset="UTF-8">
+    <title>Comment Us</title>
+</head>
+<body>
+<h1>Posts</h1>
+<div>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col" class="text-center">Id</th>
+        <th scope="col" class="text-center">Title</th>
+        <th scope="col" class="text-center">Content</th>
+        <th scope="col" class="text-center">Created At</th>
+        <th scope="col" class="text-center">User Name</th>
+        <th scope="col" class="text-center">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${}">
+        <td th:href="@{/post/__${postsList.id}__}" th:text="${postsList.id}" class="text-center align-middle"></td>
+        <td th:text="${postsList.title}" class="text-center align-middle"></td>
+        <td th:text="${postsList.text}" class="text-center align-middle"></td>
+        <td th:text="${postsList.createdAt}" class="text-center align-middle"></td>
+        <td th:text="${postsList.userName}" class="text-center align-middle"></td>
+<!--        <td class="text-center align-middle">-->
+<!--        <form method="post" th:action="@{/posts/{id}/delete(id=${postsList.id})}">-->
+<!--        <a th:href="@{/postsList/__${post.id}__}" class='btn btn-info action-btn'>-->
+<!--        <span>-->
+<!--                class="fas fa-post-edit"></span>Edit</a>-->
+<!--            <button type="submit" class="btn btn-danger action-btn"><span class="fas fa-user-minus">-->
+<!--            </span>Delete</button>-->
+        </form>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Data
-@Entity(name = "posts")
+@Entity
 public class Post {
 
     @Id

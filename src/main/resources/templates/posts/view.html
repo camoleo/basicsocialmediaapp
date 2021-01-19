@@ -17,7 +17,7 @@
             <span th:if="${post.userName}" th:remove="tag">
                 <i>by</i>
                 <span th:text="${post.userName.fullName != null ?
-                post.userName.fullName : post.userName}">Svetlin Nakov</span>
+                post.userName.fullName : post.userName}">Janek Kowalski</span>
             </span>
         </div>
         <p class="content" th:utext="${post.text}">Post content</p>
