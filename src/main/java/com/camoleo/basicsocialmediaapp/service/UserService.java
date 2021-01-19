@@ -5,7 +5,7 @@ import com.camoleo.basicsocialmediaapp.model.User;
 import java.util.List;
 
 public interface UserService {
-    boolean authenticate(String userName, String password);
+    boolean authenticate(String username, String password);
     boolean hasUser(String username);
     void create(String username, String password);
     User create(User user);

@@ -1,42 +1,35 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="homepage :: site-head">
-    <meta charset="UTF-8">
-    <title>Comment Us</title>
+    <title>Posts</title>
 </head>
+
 <body>
-<h1>Posts</h1>
-<div>
-<table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col" class="text-center">Id</th>
-        <th scope="col" class="text-center">Title</th>
-        <th scope="col" class="text-center">Content</th>
-        <th scope="col" class="text-center">Created At</th>
-        <th scope="col" class="text-center">User Name</th>
-        <th scope="col" class="text-center">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="post : ${}">
-        <td th:href="@{/post/__${postsList.id}__}" th:text="${postsList.id}" class="text-center align-middle"></td>
-        <td th:text="${postsList.title}" class="text-center align-middle"></td>
-        <td th:text="${postsList.text}" class="text-center align-middle"></td>
-        <td th:text="${postsList.createdAt}" class="text-center align-middle"></td>
-        <td th:text="${postsList.userName}" class="text-center align-middle"></td>
-<!--        <td class="text-center align-middle">-->
-<!--        <form method="post" th:action="@{/posts/{id}/delete(id=${postsList.id})}">-->
-<!--        <a th:href="@{/postsList/__${post.id}__}" class='btn btn-info action-btn'>-->
-<!--        <span>-->
-<!--                class="fas fa-post-edit"></span>Edit</a>-->
-<!--            <button type="submit" class="btn btn-danger action-btn"><span class="fas fa-user-minus">-->
-<!--            </span>Delete</button>-->
-        </form>
-    </tr>
-    </tbody>
-</table>
-</div>
+<br />
+<header th:replace="homepage :: site-header"><header/>
+<main id="posts">
+    <div th:each="post : ${posts}">
+        <article>
+            <h2 class="title" th:text="${post.title}">Post Title</h2>
+            <div class="date">
+                <i>Posted on</i>
+                <span th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy')}">22-May-2016</span>
+                <span th:if="${post.userName}" th:remove="tag">
+              <i>by</i>
+              <span th:text="${post.userName.fullName != null ?
+                post.userName.fullName : post.userName.userName}">Svetlin Navkov</span>
+            </span>
+            </div>
+            <p class="content" th:utext="${post.text}">Post content</p>
+        </article>
+        <br />
+        <a href="delete.html" th:href="@{/posts/delete/__${post.id}__}">[Delete]</a>
+        <a href="update.html" th:href="@{/posts/update/__${post.id}__}">[Update]</a>
+    </div>
+</main>
+
+<footer th:replace="homepage :: site-footer"/>
+</header>
 </body>
 </html>

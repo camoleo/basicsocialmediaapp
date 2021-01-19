@@ -35,15 +35,17 @@ public class PostsController {
         return "posts/view";
     }
 
-    @RequestMapping("/posts") //adnotacja post?
-    public String posts(@ModelAttribute ModelMap modelMap){
+    @RequestMapping("posts")
+    public String viewPosts(Model model) {
         List<Post> posts = postService.findAll();
-        modelMap.addAttribute(("posts"), posts);
+        model.addAttribute("posts", posts);
+
         return "posts/posts";
     }
 
     @RequestMapping("/posts/create")
     public String createPost(PostForm postForm) {
+
         return "posts/create";
     }
 
