@@ -1,17 +1,18 @@
 package com.camoleo.basicsocialmediaapp.controller;
 
 import com.camoleo.basicsocialmediaapp.model.Post;
+import com.camoleo.basicsocialmediaapp.model.PostForm;
+import com.camoleo.basicsocialmediaapp.model.User;
 import com.camoleo.basicsocialmediaapp.service.NotificationService;
 import com.camoleo.basicsocialmediaapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,26 +35,94 @@ public class PostsController {
         return "posts/view";
     }
 
-    @GetMapping("/posts")
+    @RequestMapping("/posts") //adnotacja post?
     public String posts(@ModelAttribute ModelMap modelMap){
         List<Post> posts = postService.findAll();
         modelMap.addAttribute(("posts"), posts);
         return "posts/posts";
     }
 
-    @GetMapping("/posts/create")
-    public String viewPosts(ModelMap modelMap){
-        modelMap.addAttribute("newPost",new Post());
+    @RequestMapping("/posts/create")
+    public String createPost(PostForm postForm) {
         return "posts/create";
     }
 
-    @PostMapping("/posts")
-    public String viewPosts(@Valid @ModelAttribute("posts") Post post, ModelMap modelMap) {
-        Post newPost = postService.create(post);
-      modelMap.addAttribute("newPost", newPost);
-        return "redirect:/posts";
+    @RequestMapping(value ="posts/create",method = RequestMethod.POST)
+    public String createPost(@Valid PostForm postForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            notifyService.addErrorMessage("Please fill the form correctly!");
+            return "posts/create";
+        }
+
+        notifyService.addInfoMessage("Successfully created");
+        return "redirect:/";
     }
 
+
+//    @RequestMapping("posts/delete/{id}")
+//    public String deletePost(@PathVariable Long id) {
+//        Post post = postService.findById(id);
+//        if (post == null) {
+//            notifyService.addErrorMessage("There is no idea with the ide of " + id);
+//            return "redirect:/posts";
+//        }
+//
+//        postService.deleteById(id);
+//        notifyService.addInfoMessage("You have successfully deleted [" + post.getTitle() + "]");
+//
+//        return "redirect:/posts";
+//    }
+//
+//    @RequestMapping("posts/update/{id}")
+//    public String updatePost(@PathVariable Long id, Model model) {
+//        Post post = postService.findById(id);
+//        if (post == null) {
+//            notifyService.addErrorMessage("There is no post with id: " + id);
+//            return "redirect:/posts";
+//        }
+//
+//        PostForm postForm = new PostForm();
+//
+//        postForm.setTitle(post.getTitle());
+//        postForm.setText(post.getText());
+//
+//        User userName = post.getUserName();
+//        if (userName != null) {
+//            String fullName = userName.getFullName();
+//            if (fullName != null && fullName != "") {
+//                postForm.setUserName(fullName);
+//            } else {
+//                postForm.setUserName(userName.setUsername());
+//            }
+//        }
+//
+//        model.addAttribute("postForm", postForm);
+//        return "posts/update";
+//    }
+//
+//    // == update mehtods ==
+//    @RequestMapping(value="posts/update/{id}", method=RequestMethod.POST)
+//    public String updatePost(@Valid PostForm postForm, BindingResult bindingResult, @PathVariable Long id) {
+//        Post post = postService.findById(id);
+//
+//        if (post == null) {
+//            notifyService.addErrorMessage("There are no posts with the id: "+ id + "!");
+//            return "redirect:/posts";
+//        }
+//
+//        User userName = new User();
+//        userName.setFullName(postForm.getUserName());
+//
+//        post.setUserName(userName);
+//        post.setText(postForm.getText());
+//        post.setTitle(postForm.getTitle());
+//
+//
+//        postService.edit(post);
+//        notifyService.addInfoMessage("Successfully updated post!");
+//
+//        return "redirect:/posts";
+//    }
 
 //    @GetMapping("posts/edit")
 //    public String showEditForm(Model model) {

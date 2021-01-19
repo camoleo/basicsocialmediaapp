@@ -41,7 +41,7 @@ public class LoginController {
             notifiyService.addErrorMessage("Invalid login!");
             return "users/login";
         }
-        notifiyService.addInfoMessage("Login succesful :)");
+        notifiyService.addInfoMessage("Login successful :)");
         return "redirect:/";
     }
     @RequestMapping("users")
