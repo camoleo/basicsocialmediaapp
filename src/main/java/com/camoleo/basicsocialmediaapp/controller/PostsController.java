@@ -2,13 +2,11 @@ package com.camoleo.basicsocialmediaapp.controller;
 
 import com.camoleo.basicsocialmediaapp.model.Post;
 import com.camoleo.basicsocialmediaapp.model.PostForm;
-import com.camoleo.basicsocialmediaapp.model.User;
 import com.camoleo.basicsocialmediaapp.service.NotificationService;
 import com.camoleo.basicsocialmediaapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +22,7 @@ public class PostsController {
     @Autowired
     private NotificationService notifyService;
 
-    @RequestMapping("/posts/view/{id}")
+    @PostMapping("/posts/view/{id}")
     public String view(@PathVariable("id") Long id, Model model) {
         Post post = postService.findById(id);
         if(post == null){
@@ -43,21 +41,22 @@ public class PostsController {
         return "posts/posts";
     }
 
-    @RequestMapping("/posts/create")
-    public String createPost(PostForm postForm) {
-
+    @GetMapping("/posts/create")
+    public String createPost(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
-    @RequestMapping(value ="posts/create",method = RequestMethod.POST)
-    public String createPost(@Valid PostForm postForm, BindingResult bindingResult){
+    @PostMapping("/posts/create")
+    public String createPost(@ModelAttribute("post") Post post, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             notifyService.addErrorMessage("Please fill the form correctly!");
             return "posts/create";
         }
-
+        System.out.println(post);
+        postService.create(post);
         notifyService.addInfoMessage("Successfully created");
-        return "redirect:/";
+        return "redirect:/posts";
     }
 
 
