@@ -22,7 +22,7 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    private NotificationService notifiyService;
+    private NotificationService notifyService;
 
     @RequestMapping("/users/login")
     public String login(LoginForm loginForm) {
@@ -33,15 +33,15 @@ public class LoginController {
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            notifiyService.addErrorMessage("Please fill the form correctly!");
+            notifyService.addErrorMessage("Please fill the form correctly!");
             return "/users/login";
         }
         if (!userService.authenticate(
                 loginForm.getUserName(), loginForm.getPassword())) {
-            notifiyService.addErrorMessage("Invalid login!");
+            notifyService.addErrorMessage("Invalid login!");
             return "users/login";
         }
-        notifiyService.addInfoMessage("Login successful :)");
+        notifyService.addInfoMessage("Login successful :)");
         return "redirect:/";
     }
     @RequestMapping("users")

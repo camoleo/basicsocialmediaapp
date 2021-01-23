@@ -6,7 +6,9 @@
 </head>
 <body>
 <header th:replace="homepage :: site-header"></header>
+
 <aside>
+
     <h2>Recent Posts</h2>
     <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}"
        th:href="@{/posts/view/{id}/(id=${p.id})}">What's up?</a>
@@ -31,5 +33,6 @@
 </main>
 Now is: <b th:text="${#execInfo.now.time}"> date and time</b>
 <footer th:replace="homepage ::site-footer"></footer>
+
 </body>
 </html>
