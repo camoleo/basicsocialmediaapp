@@ -9,10 +9,10 @@
 <header th:replace="homepage :: site-header"></header>
 <h1>Create new post</h1>
 <form method="post" th:action="@{/posts/create}"   th:object="${post}" role="form">
-    <div>
+    <div class="form-group">
     <label for="title">Title</label>:
     </div>
-    <input type="text"  th:field="*{title}" id="title" autofocus="autofocus" /> <br />
+    <input type="text" class="form-control" th:field="*{title}" id="title" autofocus="autofocus" /> <br />
     <label for="text">Content</label>:
     <input type="text" th:field="*{text}" id="text" /> <br />
 <!--    <input type="text" th:field="*{userName}" id="userName" /> <br />-->

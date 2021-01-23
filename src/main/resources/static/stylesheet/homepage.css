@@ -50,3 +50,12 @@ body>main:after {
     display: block;
     clear: both;
 }
+.navbar {
+    font-family: 'Numans', sans-serif;
+    grid-area: navbar;
+    font-size: 18px;
+}
+
+.navbar-logo {
+    width: 28px;
+}

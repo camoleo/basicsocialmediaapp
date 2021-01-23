@@ -13,6 +13,7 @@
 </aside>
 
 <main id="posts">
+    <div class="container-md">
     <article th:each="p : ${latest3posts}">
     <h2 class="title" th:text="${p.title}">Post title</h2>
     <div class="createdAt">
@@ -26,6 +27,7 @@
     </div>
     <p class="content" th:utext="${p.text}">Post content</p>
 </article>
+    </div>
 </main>
 Now is: <b th:text="${#execInfo.now.time}"> date and time</b>
 <footer th:replace="homepage ::site-footer"></footer>
