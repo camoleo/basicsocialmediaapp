@@ -10,24 +10,23 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "users")
+@Entity(name ="users")
 public class User {
     @Id
-    @GeneratedValue
-    @Column(nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 30, unique = true)
     private String userName;
 
     @Column(nullable = false)
     @Length(min = 8, max = 30)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String fullName;
 
-    @OneToMany//albo ManyToOne - do sprawdzenia
+    @OneToMany(mappedBy = "userName")
     private Set<Post> posts = new HashSet<>();
 
     public User(Long id, String userName, String fullName) {

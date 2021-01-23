@@ -12,28 +12,35 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Data
-@Entity
+@Entity(name = "posts")
 public class Post {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+
+    @Column(nullable = false, length = 300)
     private String title;
+
+    @Column(nullable = false)
     private String text;
+
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdAt;
-    @ManyToOne
+    private LocalDate createdAt = LocalDate.now();
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userName;
 
     public Post() {
     }
 
-    public Post(Long id, String title, String text, User userName) {
+    public Post(Long id, String title, String text, User userName, LocalDate createdAt) {
         this.id = id;
         this.title = title;
         this.text = text;
         this.userName = userName;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {

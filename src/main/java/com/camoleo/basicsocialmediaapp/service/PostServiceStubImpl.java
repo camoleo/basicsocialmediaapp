@@ -4,6 +4,7 @@ import com.camoleo.basicsocialmediaapp.model.Post;
 import com.camoleo.basicsocialmediaapp.model.User;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,14 +15,14 @@ import java.util.stream.Collectors;
 public class PostServiceStubImpl implements PostService {
 
     private List<Post> posts = new ArrayList<Post>() {{
-        add(new Post(1L, "First Post", "<p>Line #1.</p><p>Line #2</p>", null));
-        add(new Post(2L, "Second Post", "Second post content:<ul><li>line 1</li><li>line 2</li></p>",
-                new User(10L, "pesho10", "Jan Kowalksi")));
+        add(new Post(1L, "First Post", "<p>Line #1.</p><p>Line #2</p>", null, LocalDate.now()));
+        add(new Post(2L, "Second Post", "Second post content:<ul><li>line 1</li><li>line 2</li></p>",new User(10L, "pesho10", "Jan Kowalksi"),LocalDate.now()
+                ));
         add(new Post(3L, "Post #3", "<p>The post number 3 nice</p>",
-                new User(10L, "merry", null)));
-        add(new Post(4L, "Forth Post", "<p>Not interesting post</p>", null));
-        add(new Post(5L, "Post Number 5", "<p>Just posting</p>", null));
-        add(new Post(6L, "Sixth Post", "<p>Another interesting post</p>", null));
+                new User(10L, "merry", null),LocalDate.now()));
+        add(new Post(4L, "Forth Post", "<p>Not interesting post</p>", null,LocalDate.now()));
+        add(new Post(5L, "Post Number 5", "<p>Just posting</p>", null,LocalDate.now()));
+        add(new Post(6L, "Sixth Post", "<p>Another interesting post</p>", null,LocalDate.now()));
     }};
 
     @Override
