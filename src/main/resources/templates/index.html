@@ -20,7 +20,9 @@
     <h2 class="title" th:text="${p.title}">Post title</h2>
     <div class="createdAt">
     <i>Posted on</i>
-    <span th:text="${#dates.format(p.createdAt,'dd-MM-yyyy')}">15-01-2021</span>
+
+        <p th:text="${#temporals.format(p.createdAt, 'dd-MM-yyyy')}"></p>
+<!--    <span th:text="${#dates.format(p.createdAt,'dd-MM-yyyy')}"></span>-->
     <span th:if="${p.userName}" th:remove="tag">
         <i>by</i>
         <span th:text="${p.userName.fullName !=null ?
